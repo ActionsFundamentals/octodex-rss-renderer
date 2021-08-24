@@ -66,7 +66,7 @@ export default function Octocat({
         </Card>
 
         <Dialog
-          fullScreen="true"
+          fullScreen={true}
           open={open}
           onClose={handleClose}
           TransitionComponent={Transition}
