@@ -1,0 +1,22 @@
+{
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "dev",
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+  ],
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "shell": {
+        "path": "/bin/bash"
+      }
+    },
+    "telemetry.enableTelemetry": false,
+    "extensions.ignoreRecommendations": true
+  },
+  "remoteEnv": {
+    "NEXT_TELEMETRY_DISABLED": 1
+  },
+  "postAttachCommand": "npm ci"
+}
