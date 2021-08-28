@@ -44,6 +44,5 @@ jobs:
           name: app-${{ matrix.os }}-${{ matrix.node_version }}
           path: |
             .next
-            node_modules
             public
             package.json
