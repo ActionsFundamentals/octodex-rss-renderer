@@ -25,7 +25,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: name/app
+          images: ghcr.io/name/app
 
       - name: Docker Build and Push
         uses: docker/build-push-action@v2
