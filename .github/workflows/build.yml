@@ -1,0 +1,47 @@
+name: Build
+
+on:
+  push:
+  workflow_distpatch:
+
+jobs:
+  build:
+    name: Build
+
+    strategy:
+      os:
+        - ubuntu-20.04
+        - windows-latest
+      node_version:
+        - 16
+        - 14
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Save Applicaton Bundle
+        uses: actions/save-artifact@v2
+          with:
+            name: app-${{ matrix.os }}-${{ matrix.node_version }}
+            path: |
+              .next
+              node_modules
+              public
+              package.json
