@@ -39,7 +39,7 @@ jobs:
         run: npm run build
 
       - name: Save Applicaton Bundle
-        uses: actions/save-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
           name: app-${{ matrix.os }}-${{ matrix.node_version }}
           path: |
