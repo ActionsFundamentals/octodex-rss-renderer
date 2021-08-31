@@ -91,8 +91,13 @@ jobs:
       # Define the container URL tag for publishing
       - name: Define container tag
         id: container_meta
-        run: |
-          echo "::set-output name=container_tag::ghcr.io/${{ github.repository }}/${{ github.sha }}"
+        uses: actions/github-script@v4
+        with:
+          script: |
+            core.setOutput(
+              'container_tag',
+              `ghcr.io/${context.repo.owner}/${context.repo.repo}:${context.sha}`.toLowerCase()
+            );
 
       - name: Build Container
         run: |
