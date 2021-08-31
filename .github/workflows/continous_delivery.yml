@@ -86,7 +86,7 @@ jobs:
       - name: Restore the node_modules
         run: |
           npm ci
-        working-directory: continous-delivery/app
+        working-directory: continuous-delivery/app
 
       # Define the container URL tag for publishing
       - name: Define container tag
@@ -115,7 +115,7 @@ jobs:
   # Deploys the container to a Cloud Environment
   #
   deploy:
-    name: Deploy to Environment
+    name: Deploy to Azure Environment
 
     needs:
         - build
@@ -123,6 +123,44 @@ jobs:
 
     runs-on: ubuntu-20.04
 
+    environment:
+      name: azure_production
+      url: ${{ steps.azure_deployment.outputs.app-url }}
+
+    env:
+      acr_container: ${{ secrets.ACR_URL }}/octodex-rss-renderer:${{ github.sha }}
+
     steps:
       - name: Deploy
         run: echo "deploying..."
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login to ACR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ secrets.ACR_URL }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Fetch GHCR Container and push to ACR
+        run: |
+          docker fetch ${{ needs.build_container.outputs.deployment_container_url }}
+          docker tag ${{ needs.build_container.outputs.deployment_container_url }} ${{ env.acr_container }}
+          docker push ${{ env.acr_container }}
+
+      - name: Deploy Container
+        id: azure_deployment
+        uses: azure/aci-deploy@v1
+        with:
+          resource-group: ${{ secrets.RESOURCE_GROUP }}
+          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+          image: ${{ env.acr_container }}
+          registry-username: ${{ secrets.ACR_USERNAME }}
+          registry-password: ${{ secrets.ACR_PASSWORD }}
+          name: octodex-rss-renderer
+          location: south uk
+          ports: 3000
