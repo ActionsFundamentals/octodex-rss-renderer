@@ -107,18 +107,18 @@ jobs:
           docker push ${{ steps.container_meta.outputs.container_tag }}
 
 
-    #
-    # Deploys the container to a Cloud Environment
-    #
-    deploy:
-      name: Deploy to Environment
+  #
+  # Deploys the container to a Cloud Environment
+  #
+  deploy:
+    name: Deploy to Environment
 
-      needs:
-         - build
-         - build_container
+    needs:
+        - build
+        - build_container
 
-      runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04
 
-      steps:
-        - name: Deploy
-          run: echo "deploying..."
+    steps:
+      - name: Deploy
+        run: echo "deploying..."
