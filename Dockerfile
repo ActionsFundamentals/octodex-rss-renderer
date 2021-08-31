@@ -1,3 +1,10 @@
+#
+# This Dockerfile is a complete multi stage build that will install Node.js dependencies
+# build the Next.js application and the compose the necessary pieces into a small exeution
+# container that is minimal and can be deployed or used to run our application.
+#
+
+# Node.js Dependencies
 FROM node:alpine as DEPENDENCIES
 RUN apk add --no-cache libc6-compat
 WORKDIR /build
@@ -5,7 +12,7 @@ COPY package*.json ./
 RUN npm ci
 
 
-
+# Our Application built from sources
 FROM node:alpine as BUILDER
 WORKDIR /build
 COPY . .
@@ -13,7 +20,7 @@ COPY --from=DEPENDENCIES /build/node_modules ./node_modules
 RUN npm run build
 
 
-
+# The execution container for deploying and running application
 FROM node:alpine as RUNNER
 
 ENV NODE_ENV production

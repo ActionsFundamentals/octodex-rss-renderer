@@ -1,12 +1,28 @@
+
+#
+# Workflow that utilizes the Dockerfile with a multi stage build to compose the container
+# for running the application whilst trying to keep it as small as possible.
+#
+# Workflow will only execute when the software can successfully build from the sources.
+#
 name: Container Build
 
 on:
-  push:
-  workflow_dispatch:
+  # Trigger off of the completion of the "Build and Test" workflow execution
+  workflow_run:
+    workflows:
+      - Build and Test
+    branches:
+      - main
+    types:
+      - completed
 
 jobs:
   build:
     name: Build Container
+
+    # Only build the container if the source code passed the build and test workflow successfully
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     runs-on: ubuntu-latest
 
