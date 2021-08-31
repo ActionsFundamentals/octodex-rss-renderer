@@ -78,6 +78,10 @@ jobs:
         with:
           name: app-ubuntu-20.04-16
           path: continuous-delivery/app
+          
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: continuous-delivery/app
 
       - name: Restore the node_modules
         run: |
