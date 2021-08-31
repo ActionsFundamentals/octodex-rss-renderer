@@ -78,7 +78,7 @@ jobs:
         with:
           name: app-ubuntu-20.04-16
           path: continuous-delivery/app
-          
+
       - name: Display structure of downloaded files
         run: ls -R
         working-directory: continuous-delivery/app
@@ -86,7 +86,7 @@ jobs:
       - name: Restore the node_modules
         run: |
           npm ci
-        working-directory: continous-delivery
+        working-directory: continous-delivery/app
 
       # Define the container URL tag for publishing
       - name: Define container tag
