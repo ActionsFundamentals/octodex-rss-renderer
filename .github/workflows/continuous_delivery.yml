@@ -167,5 +167,5 @@ jobs:
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
           name: octodex-rss-renderer
-          location: south uk
+          location: uksouth
           ports: 3000
