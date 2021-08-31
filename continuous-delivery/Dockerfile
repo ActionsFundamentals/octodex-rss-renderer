@@ -7,8 +7,8 @@ FROM node:buster
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
+RUN addgroup --gid 1001 --system nodejs
+RUN adduser --system nodejs --gid 1001 --uid 1001
 
 USER nodejs
 
