@@ -4,7 +4,7 @@
 # environment.
 #
 
-name: Continuous Delivery
+name: Continuous Delivery (skip azure deploy)
 
 on:
   # push:
