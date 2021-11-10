@@ -13,7 +13,7 @@ RUN npm ci
 
 
 # Our Application built from sources
-FROM node:alpine as BUILDER
+FROM node:16-alpine as BUILDER
 WORKDIR /build
 COPY . .
 COPY --from=DEPENDENCIES /build/node_modules ./node_modules
@@ -21,7 +21,7 @@ RUN npm run build
 
 
 # The execution container for deploying and running application
-FROM node:alpine as RUNNER
+FROM node:16-alpine as RUNNER
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
