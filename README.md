@@ -1,3 +1,5 @@
+[![Build and Test](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/build_and_test.yml) [![Container Build](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/container_build.yml/badge.svg)](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/container_build.yml) [![Continuous Delivery](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/continuous_delivery_complete.yml/badge.svg)](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/continuous_delivery_complete.yml) [![Continuous Delivery (skip azure deploy)](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/continuous_delivery_no_azure.yml/badge.svg)](https://github.com/ActionsFundamentals/octodex-rss-renderer/actions/workflows/continuous_delivery_no_azure.yml)
+
 # GitHub Octodex RSS Feed Renderer
 
 This repository hosts a basic [Next.js](https://nextjs.org/) application that can consume the 
