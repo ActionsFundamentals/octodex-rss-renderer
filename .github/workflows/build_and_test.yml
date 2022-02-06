@@ -46,3 +46,4 @@ jobs:
             .next
             public
             package.json
+            next.config.js
