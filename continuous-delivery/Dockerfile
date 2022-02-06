@@ -17,6 +17,7 @@ COPY ./app/node_modules ./node_modules
 COPY ./app/public ./public
 COPY ./app/.next ./.next
 COPY ./app/package.json ./package.json
+COPY ./app/next.config.js ./next.config.js
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
