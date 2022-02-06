@@ -5,18 +5,18 @@
 #
 
 # Node.js Dependencies
-FROM node:alpine as DEPENDENCIES
+FROM node:16-alpine as DEPENDENCIES
 RUN apk add --no-cache libc6-compat
-WORKDIR /build
+WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
 
 # Our Application built from sources
 FROM node:16-alpine as BUILDER
-WORKDIR /build
+WORKDIR /app
 COPY . .
-COPY --from=DEPENDENCIES /build/node_modules ./node_modules
+COPY --from=DEPENDENCIES /app/node_modules ./node_modules
 RUN npm run build
 
 
@@ -30,10 +30,11 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nodejs -u 1001
 
 WORKDIR /app
-COPY --from=BUILDER --chown=nodejs:nodejs /build/public ./public
-COPY --from=BUILDER --chown=nodejs:nodejs /build/.next ./.next
-COPY --from=DEPENDENCIES --chown=nodejs:nodejs /build/node_modules ./node_modules
+COPY --from=BUILDER --chown=nodejs:nodejs /app/public ./public
+COPY --from=BUILDER --chown=nodejs:nodejs /app/.next ./.next
+COPY --from=DEPENDENCIES --chown=nodejs:nodejs /app/node_modules ./node_modules
 COPY package.json ./package.json
+COPY next.config.js ./next.config.js
 
 USER nodejs
 

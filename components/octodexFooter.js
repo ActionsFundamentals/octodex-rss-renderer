@@ -1,4 +1,4 @@
-import {Box, Grid, Link, Typography} from "@material-ui/core";
+import {Box, Grid, Link, Typography} from "@mui/material";
 import packageJson from '../package.json';
 
 export default function OctodexFooter() {

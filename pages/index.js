@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {getOctocats} from "../lib/octodex";
 import Octocats from '../components/octocats'
-import {Container} from "@material-ui/core";
+import {Container} from "@mui/material";
 import OctodexHeader from "../components/octodexHeader";
 import OctodexFooter from "../components/octodexFooter";
 

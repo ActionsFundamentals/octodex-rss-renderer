@@ -6,7 +6,7 @@ import {
   CardContent,
   CardMedia, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Slide,
   Typography
-} from "@material-ui/core";
+} from "@mui/material";
 import React from'react';
 import Image from 'next/image'
 
