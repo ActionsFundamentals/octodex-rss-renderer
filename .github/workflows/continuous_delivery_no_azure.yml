@@ -53,6 +53,7 @@ jobs:
             public
             package.json
             package-lock.json
+            next.config.js
 
 
   #
